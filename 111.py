@@ -3,7 +3,7 @@ import numpy as np
 import cv2
 import tkinter
 
-window=tkinter.Tk()
+
 
 
 model_filename = 'keras_model.h5'
@@ -28,40 +28,44 @@ def predict(frame):
     prediction = model.predict(frame)
     return prediction
 
+flag=0
 while 1:
     ret, frame = capture.read()
     preprocessed = preprocessing(frame)
     prediction = predict(preprocessed)
     print(prediction)
+    
     if cv2.waitKey(1) == ord('q'):
+        window=tkinter.Tk()
         if prediction[0][0] > 0.5:
             window.title("스쿨")
             window.geometry("250x10+100+100")
             window.resizable(False, False)
-            window.mainloop()
         elif prediction[0][1] > 0.5:
             window.title("리얼리스틱")
             window.geometry("250x10+100+100")
             window.resizable(False, False)
-            window.mainloop()
+            #window.mainloop()
         elif prediction[0][2] > 0.5:
             window.title("이레즈미")
             window.geometry("250x10+100+100")
             window.resizable(False, False)
-            window.mainloop()
+            #window.mainloop()
         elif prediction[0][3] > 0.5:
             window.title("블랙워크")
             window.geometry("250x10+100+100")
             window.resizable(False, False)
-            window.mainloop()
+            #window.mainloop()
         elif prediction[0][4] > 0.5:
             window.title("폴리네시안")
             window.geometry("250x10+100+100")
             window.resizable(False, False)
-            window.mainloop()
+            #window.mainloop()
         elif prediction[0][5] > 0.5:
             window.title("레터링")
             window.geometry("250x10+100+100")
             window.resizable(False, False)
-            window.mainloop()
+            #window.mainloop()
+        window.mainloop()
     cv2.imshow("VideoFrame", frame)
+  
